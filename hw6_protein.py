@@ -17,7 +17,9 @@ Parameters: str
 Returns: str
 '''
 def readFile(filename):
-    return
+    read_file=open(filename,"r").read().splitlines()
+    string="".join(read_file)
+    return string
 
 
 '''
@@ -186,10 +188,11 @@ def runFullProgram():
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
-    test.week1Tests()
-    print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    runWeek1()
+    # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
+    # test.week1Tests()
+    # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
+    # runWeek1()
+    test.testReadFile()
 
     ## Uncomment these for Week 2 ##
     """
