@@ -235,7 +235,15 @@ Parameters: list of strs ; 2D list of strs
 Returns: list of floats
 '''
 def setupChartData(labels, proteinList):
-    return
+    protein_list=combineProteins(proteinList)
+    amino_dicts=aminoAcidDictionary(protein_list)
+    frequency=[]
+    for i in labels:
+        if i in amino_dicts:
+            frequency.append(amino_dicts[i]/len(protein_list))
+        else:
+            frequency.append(0)
+    return frequency
 
 
 '''
@@ -296,7 +304,8 @@ if __name__ == "__main__":
     """
 
     ## Uncomment these for Week 3 ##
-    test.testMakeAminoAcidLabels()
+    #test.testMakeAminoAcidLabels()
+    test.testSetupChartData()
     """
     print("\n" + "#"*15 + " WEEK 3 TESTS " +  "#" * 16 + "\n")
     test.week3Tests()
