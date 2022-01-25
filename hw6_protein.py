@@ -17,7 +17,9 @@ Parameters: str
 Returns: str
 '''
 def readFile(filename):
-    return
+    read_file=open(filename,"r").read().splitlines()
+    string="".join(read_file)
+    return string
 
 
 '''
@@ -27,9 +29,16 @@ Parameters: str ; int
 Returns: list of strs
 '''
 def dnaToRna(dna, startIndex):
-    return
-
-
+    replace_dna=dna[startIndex:].replace('T', 'U')
+    Rna_list=[]
+    for i in range(0,len(replace_dna),3):
+        index=replace_dna[i:i+3]
+        Rna_list.append(index)
+    for i in Rna_list:
+        if i=="UAA" or i=="UAG" or i=="UGA":
+            word_index=Rna_list.index(i)
+            return Rna_list[:word_index+1]
+    return Rna_list
 '''
 makeCodonDictionary(filename)
 #3 [Check6-1]
@@ -38,7 +47,14 @@ Returns: dict mapping strs to strs
 '''
 def makeCodonDictionary(filename):
     import json
-    return
+    open_file=open(filename,"r")
+    data=json.load(open_file)
+    codon_dict={}
+    for i,j in data.items():
+        for k in j:
+            replace=k.replace('T','U')
+            codon_dict[replace]=i
+    return codon_dict
 
 
 '''
@@ -48,7 +64,13 @@ Parameters: list of strs ; dict mapping strs to strs
 Returns: list of strs
 '''
 def generateProtein(codons, codonD):
-    return
+    amino_list=[]
+    for i in codons:
+        if len(amino_list)==0 and i=="AUG":
+            amino_list.append("Start")
+        else:
+            amino_list.append(codonD[i])
+    return amino_list
 
 
 '''
@@ -58,7 +80,23 @@ Parameters: str ; str
 Returns: 2D list of strs
 '''
 def synthesizeProteins(dnaFilename, codonFilename):
-    return
+    overall_protein=[]
+    unused_base=0
+    read_file=readFile(dnaFilename)
+    codon_dict=makeCodonDictionary(codonFilename)
+    startIndex=0
+    while len(read_file)>startIndex:
+        find_ATG=read_file[startIndex:startIndex+3]
+        if find_ATG!="ATG":
+            startIndex+=1
+            unused_base+=1
+        else:
+            Rna_seq=dnaToRna(read_file, startIndex)
+            protein_data=generateProtein(Rna_seq, codon_dict)
+            overall_protein.append(protein_data)
+            startIndex+=3*len(overall_protein[-1])
+    print("total number of bases:",len(read_file),"unused-base count:",unused_base,"total number of proteins synthesized:",len(overall_protein))
+    return overall_protein
 
 
 def runWeek1():
@@ -186,11 +224,15 @@ def runFullProgram():
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
-    test.week1Tests()
-    print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    runWeek1()
-
+    # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
+    # test.week1Tests()
+    # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
+    # runWeek1()
+    #test.testReadFile()
+    #test.testDnaToRna()
+    #test.testMakeCodonDictionary()
+    #test.testGenerateProtein()
+    test.testSynthesizeProteins()
     ## Uncomment these for Week 2 ##
     """
     print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
