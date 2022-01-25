@@ -115,7 +115,8 @@ Parameters: 2D list of strs ; 2D list of strs
 Returns: 2D list of strs
 '''
 def commonProteins(proteinList1, proteinList2):
-    return
+    uniq_protein=[ i for i in proteinList1 if i in proteinList2]
+    return uniq_protein
 
 
 '''
@@ -227,12 +228,13 @@ if __name__ == "__main__":
     # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
     # test.week1Tests()
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    # runWeek1()
+    #runWeek1()
     #test.testReadFile()
     #test.testDnaToRna()
     #test.testMakeCodonDictionary()
     #test.testGenerateProtein()
-    test.testSynthesizeProteins()
+    #test.testSynthesizeProteins()
+    test.testCommonProteins()
     ## Uncomment these for Week 2 ##
     """
     print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
