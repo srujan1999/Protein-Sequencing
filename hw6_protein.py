@@ -192,8 +192,7 @@ def displayTextResults(commonalities, differences):
             string="".join(i)
             if string not in common_list:
                 common_list.append(string)
-    sort1=sorted(common_list)
-    for i in sort1:
+    for i in sorted(common_list):
         print(i)
     
     for i in differences:
@@ -221,7 +220,12 @@ Parameters: 2D list of strs ; 2D list of strs
 Returns: list of strs
 '''
 def makeAminoAcidLabels(proteinList1, proteinList2):
-    return
+    protein_list=combineProteins(proteinList1)+combineProteins(proteinList2)
+    overall_protein=[]
+    for i in protein_list:
+        if i not in overall_protein:
+            overall_protein.append(i)
+    return sorted(overall_protein)
 
 
 '''
@@ -283,7 +287,7 @@ if __name__ == "__main__":
     #test.testCombineProteins()
     #test.testAminoAcidDictionary()
     #test.testFindAminoAcidDifferences()
-    runWeek2()
+    #runWeek2()
     """
     print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()
@@ -292,6 +296,7 @@ if __name__ == "__main__":
     """
 
     ## Uncomment these for Week 3 ##
+    test.testMakeAminoAcidLabels()
     """
     print("\n" + "#"*15 + " WEEK 3 TESTS " +  "#" * 16 + "\n")
     test.week3Tests()
