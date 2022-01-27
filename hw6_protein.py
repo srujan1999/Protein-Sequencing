@@ -198,7 +198,7 @@ def displayTextResults(commonalities, differences):
     for i in differences:
         j=i[1]
         k=i[2]
-        print("Gly:","{:.2%}".format(j),"in Seq1",",","{:.2%}".format(k),"in Seq2")
+        print(i[0],"{:.2%}".format(j),"in Seq1",",","{:.2%}".format(k),"in Seq2")
     return
 
 
